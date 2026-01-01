@@ -1,0 +1,43 @@
+{
+  "name": "villagefund",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon ./src/server.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/stephmut24/VillageFund.git"
+  },
+  "keywords": [
+    "Node.js",
+    "Express.js",
+    "Typescript",
+    "PostgreSql",
+    "Sequelize"
+  ],
+  "author": "Stephan Mugisho Mutarushwa",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/stephmut24/VillageFund/issues"
+  },
+  "homepage": "https://github.com/stephmut24/VillageFund#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^5.2.1",
+    "pg": "^8.16.3",
+    "pg-hstore": "^2.3.4",
+    "sequelize": "^6.37.7",
+    "swagger-ui-express": "^5.0.1"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.6",
+    "@types/swagger-jsdoc": "^6.0.4",
+    "@types/swagger-ui-express": "^4.1.8",
+    "sequelize-cli": "^6.6.3"
+  }
+}
