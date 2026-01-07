@@ -1,7 +1,12 @@
 import { Request, Response, NextFunction } from 'express';
 import { AppError } from '../utils';
 
-export const errorHandler = (err: unknown, req: Request, res: Response, next: NextFunction) => {
+export const errorHandler = (
+  err: unknown,
+  req: Request,
+  res: Response,
+  _next: NextFunction,
+) => {
   // Normaliser les erreurs non-Error
   let errorToHandle: Error | AppError;
   if (err instanceof AppError) {
@@ -10,7 +15,9 @@ export const errorHandler = (err: unknown, req: Request, res: Response, next: Ne
     errorToHandle = err;
   } else {
     console.error('Non-Error thrown:', err);
-    errorToHandle = new Error(typeof err === 'object' ? JSON.stringify(err) : String(err));
+    errorToHandle = new Error(
+      typeof err === 'object' ? JSON.stringify(err) : String(err),
+    );
   }
 
   // Log pour debug

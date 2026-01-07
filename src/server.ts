@@ -33,7 +33,6 @@ const startApp = async () => {
     // routes
     app.use(configs.prefix, mainRoute);
 
-  
     // error handler
     app.use(errorHandler);
 

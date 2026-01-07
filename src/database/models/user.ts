@@ -1,78 +1,93 @@
-import {DataTypes, Model,Optional, Sequelize} from 'sequelize';
+import { DataTypes, Model, Optional, Sequelize } from 'sequelize';
+import { Models } from '.';
 
 export enum Role1 {
-    User = "USER",
-    SUPER_ADMIN = "SUPER_ADMIN"
+  USER = 'USER',
+  SUPER_ADMIN = 'SUPER_ADMIN',
 }
 
-interface UserAttributes {
-    id: string;
-    fullName: string;
-    email: string;
-    password:string;
-    globalRole: Role1;
-    createdAt?: Date;
-    updatedAt?: Date;
+export interface UserAttributes {
+  id: number;
+  fullName: string;
+  email: string;
+  password: string;
+  globalRole: Role1;
+  isActive: boolean;
+  createdAt?: Date;
+  updatedAt?: Date;
 }
 
-interface UserCreationAttributes extends Optional<UserAttributes, 'id'> {
-    id?: string;
+export type UserCreationAttributes = Optional<
+  UserAttributes,
+  'id' | 'isActive'
+>;
+
+export class Users
+  extends Model<UserAttributes, UserCreationAttributes>
+  implements UserAttributes
+{
+  public id!: number;
+  public fullName!: string;
+  public email!: string;
+  public password!: string;
+  public globalRole!: Role1;
+  public isActive!: boolean;
+
+  public readonly createdAt!: Date;
+  public readonly updatedAt!: Date;
+
+  static associate(models: Models) {
+    Users.hasMany(models.Avec, {
+      foreignKey: 'ownerId',
+      as: 'ownedAvecs',
+    });
+
+    Users.hasMany(models.AvecMember, {
+      foreignKey: 'userId',
+      as: 'avecMemberships',
+    });
+  }
 }
 
-export class Users extends Model<UserAttributes, UserCreationAttributes> implements UserAttributes{
-    public id! : string;
-    public fullName! : string;
-    public email! : string;
-    public password! : string;
-    public globalRole! : Role1;
+export const UserModel = (sequelize: Sequelize) => {
+  Users.init(
+    {
+      id: {
+        type: DataTypes.INTEGER,
+        autoIncrement: true,
+        primaryKey: true,
+      },
+      fullName: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      email: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        unique: true,
+      },
+      password: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      globalRole: {
+        type: DataTypes.ENUM('USER', 'SUPER_ADMIN'),
+        allowNull: false,
+        defaultValue: 'USER',
+      },
+      isActive: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        defaultValue: true,
+      },
+    },
+    {
+      sequelize,
+      tableName: 'users',
+      modelName: 'Users',
+      timestamps: true,
+    },
+  );
 
-    public readonly createdAt!: Date;
-    public readonly updatedAt!: Date;
-
-    association() {}
-}
-
-export const UserModel = (sequelize: Sequelize) =>{
-    Users.init(
-        {
-            id: {
-                type: DataTypes.INTEGER,
-                autoIncrement: true,
-                primaryKey: true,
-                allowNull: false,
-            },
-            
-            fullName: {
-                type: DataTypes.STRING,
-                allowNull: false,
-            },
-
-            email: {
-                type: DataTypes.STRING,
-                allowNull: false,
-                unique: true,
-            },
-
-            password: {
-                type: DataTypes.STRING,
-                allowNull: false,
-            },
-            globalRole: {
-                type: DataTypes.ENUM("USER", "SUPER_ADMIN"),
-                allowNull: false,
-                defaultValue: "USER",
-            }
-        },
-        {
-            sequelize,
-            modelName: "Users",
-            tableName: "users",
-            timestamps: true,
-
-        }
-       
-    )
-
-    return Users;
-}
-
+  return Users;
+};

@@ -1,13 +1,13 @@
 import bcrypt from 'bcrypt';
-import { Users, Role1 } from '../database/models';
+import { models } from '../config/sequelize';
+import { Role1 } from '../database/models';
 import { AppError } from '../utils';
-
 
 interface CreateUserDTO {
   fullName: string;
   email: string;
   password: string;
-  globalRole?: Role1; 
+  globalRole?: Role1;
 }
 
 export class UserService {
@@ -15,8 +15,7 @@ export class UserService {
    * CREATE USER
    */
   static async createUser(data: CreateUserDTO) {
-    
-    const existingUser = await Users.findOne({
+    const existingUser = await models.Users.findOne({
       where: { email: data.email },
     });
 
@@ -24,15 +23,13 @@ export class UserService {
       throw new AppError('Email already in use', 409);
     }
 
-    
     const hashedPassword = await bcrypt.hash(data.password, 10);
 
-    
-    const user = await Users.create({
+    const user = await models.Users.create({
       fullName: data.fullName,
       email: data.email,
       password: hashedPassword,
-      globalRole: Role1.User, 
+      globalRole: Role1.USER,
     });
 
     return user;
@@ -42,7 +39,7 @@ export class UserService {
    * GET ALL USERS
    */
   static async getAllUsers() {
-    return Users.findAll({
+    return models.Users.findAll({
       attributes: { exclude: ['password'] },
       order: [['createdAt', 'DESC']],
     });
@@ -52,7 +49,7 @@ export class UserService {
    * GET USER BY ID
    */
   static async getUserById(id: number) {
-    const user = await Users.findByPk(id, {
+    const user = await models.Users.findByPk(id, {
       attributes: { exclude: ['password'] },
     });
 
@@ -67,7 +64,7 @@ export class UserService {
    * DELETE USER
    */
   static async deleteUser(id: number) {
-    const user = await Users.findByPk(id);
+    const user = await models.Users.findByPk(id);
 
     if (!user) {
       throw new AppError('User not found', 404);

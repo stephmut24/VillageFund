@@ -8,10 +8,6 @@ const authRoute = Router();
 /**
  * POST /auth/login
  */
-authRoute.post(
-  '/login',
-  validate(loginSchema),
-  AuthController.login
-);
+authRoute.post('/login', validate(loginSchema), AuthController.login);
 
 export default authRoute;

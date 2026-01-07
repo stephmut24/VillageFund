@@ -1,46 +1,27 @@
+import { Users } from '../database/models';
 import bcrypt from 'bcrypt';
-import jwt from 'jsonwebtoken';
-import { Users, Role1 } from '../database/models';
-import { AppError } from '../utils';
-
-
-interface LoginDTO {
-  email: string;
-  password: string;
-}
+import { generateToken, AppError } from '../utils';
+import { UserPayload } from '../types/auth.types';
 
 export class AuthService {
-  static async login(data: LoginDTO) {
-    const user = await Users.findOne({
-      where: { email: data.email },
-    });
+  static async login(email: string, password: string): Promise<string> {
+    const user = await Users.findOne({ where: { email } });
 
     if (!user) {
-      throw new AppError('Invalid email or password', 401);
+      throw new AppError('Invalid credentials', 401);
     }
 
-    const isMatch = await bcrypt.compare(data.password, user.password);
-
+    const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
-      throw new AppError('Invalid email or password', 401);
+      throw new AppError('Invalid credentials', 401);
     }
 
-    const payload = {
+    const payload: UserPayload = {
       id: user.id,
-      role: user.globalRole,
+      email: user.email,
+      globalRole: user.globalRole,
     };
 
-    const token = jwt.sign(payload, process.env.JWT_SECRET!, {
-      expiresIn: '1d',
-    });
-
-    return {
-      token,
-      user: {
-        id: user.id,
-        email: user.email,
-        role: user.globalRole,
-      },
-    };
+    return generateToken(payload);
   }
 }

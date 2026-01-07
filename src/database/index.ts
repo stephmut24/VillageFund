@@ -1,12 +1,12 @@
 import { Sequelize } from 'sequelize';
 import { databaseConnection } from '../config';
-import { allModel } from './models';
+import { initModels } from './models';
 
 interface DatabaseConfigInterface {
   database: string;
   username: string;
   password: string;
-  port: string;
+  port: number;
 }
 
 const config = databaseConnection() as DatabaseConfigInterface;
@@ -27,7 +27,7 @@ const checkDb = async () => {
 
     if (result.length === 0) {
       console.log(
-        `Database '${config.database}' doesnot exist. Creating it...`,
+        `Database '${config.database}' does not exist. Creating it...`,
       );
       await sequelize.query(`CREATE DATABASE "${config.database}"`);
     }
@@ -52,7 +52,7 @@ export const connectToDb = async () => {
     await sequelize.authenticate();
     console.log('Database Connected');
 
-    const models = allModel(sequelize);
+    const models= initModels(sequelize);
 
     Object.values(models).forEach((model: any) => {
       if (typeof model.associate === 'function') {
@@ -66,3 +66,5 @@ export const connectToDb = async () => {
     throw error;
   }
 };
+
+export { initModels };

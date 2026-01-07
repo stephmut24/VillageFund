@@ -3,47 +3,52 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('users', {
+    await queryInterface.createTable('avecs', {
       id: {
         type: Sequelize.INTEGER,
         autoIncrement: true,
         primaryKey: true,
         allowNull: false,
       },
-      fullName: {
+
+      name: {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      email: {
-        type: Sequelize.STRING,
+
+      ownerId: {
+        type: Sequelize.INTEGER,
         allowNull: false,
-        unique: true,
+        references: {
+          model: 'users',
+          key: 'id',
+        },
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE',
       },
-      password: {
-        type: Sequelize.STRING,
+
+      status: {
+        type: Sequelize.ENUM('PENDING', 'ACTIVE', 'CLOSED'),
         allowNull: false,
+        defaultValue: 'PENDING',
       },
-      globalRole: {
-        type: Sequelize.ENUM('USER', 'SUPER_ADMIN'),
-        allowNull: false,
-        defaultValue: 'USER',
-      },
+
       createdAt: {
-        allowNull: false,
         type: Sequelize.DATE,
+        allowNull: false,
       },
+
       updatedAt: {
-        allowNull: false,
         type: Sequelize.DATE,
+        allowNull: false,
       },
     });
   },
 
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('users');
-
+    await queryInterface.dropTable('avecs');
     await queryInterface.sequelize.query(
-      'DROP TYPE IF EXISTS "enum_users_globalRole";',
+      'DROP TYPE IF EXISTS "enum_avecs_status";',
     );
   },
 };

@@ -3,14 +3,14 @@ import { asyncHandler, successResponse } from '../utils';
 import { AuthService } from '../services/auth.service';
 
 export class AuthController {
-  static login = asyncHandler(
-    async (req: Request, res: Response) => {
-      const result = await AuthService.login(req.body);
+  static login = asyncHandler(async (req: Request, res: Response) => {
+    const { email, password } = req.body;
+    const token = await AuthService.login(email, password);
 
-      return successResponse(res, {
-        message: 'Login successful',
-        data: result,
-      });
-    }
-  );
+    return successResponse(res, {
+      statusCode: 200,
+      message: 'Login successful',
+      data: { token },
+    });
+  });
 }
