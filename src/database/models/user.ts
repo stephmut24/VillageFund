@@ -7,7 +7,7 @@ export enum Role1 {
 }
 
 export interface UserAttributes {
-  id: number;
+  id: string;
   fullName: string;
   email: string;
   password: string;
@@ -26,7 +26,7 @@ export class Users
   extends Model<UserAttributes, UserCreationAttributes>
   implements UserAttributes
 {
-  public id!: number;
+  public id!: string;
   public fullName!: string;
   public email!: string;
   public password!: string;
@@ -53,9 +53,10 @@ export const UserModel = (sequelize: Sequelize) => {
   Users.init(
     {
       id: {
-        type: DataTypes.INTEGER,
-        autoIncrement: true,
+        type: DataTypes.UUID,
+        defaultValue: DataTypes.UUIDV4,
         primaryKey: true,
+        allowNull: false,
       },
       fullName: {
         type: DataTypes.STRING,

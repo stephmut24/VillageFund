@@ -2,8 +2,8 @@ import { DataTypes, Model, Optional, Sequelize } from 'sequelize';
 import { Models } from '.';
 
 export interface CycleAttributes {
-  id: number;
-  avecId: number;
+  id: string;
+  avecId: string;
   startDate: Date;
   endDate: Date;
   sharePrice: number;
@@ -25,8 +25,8 @@ export class Cycle
   extends Model<CycleAttributes, CycleCreationAttributes>
   implements CycleAttributes
 {
-  public id!: number;
-  public avecId!: number;
+  public id!: string;
+  public avecId!: string;
   public startDate!: Date;
   public endDate!: Date;
   public sharePrice!: number;
@@ -51,13 +51,18 @@ export const CycleModel = (sequelize: Sequelize) => {
   Cycle.init(
     {
       id: {
-        type: DataTypes.INTEGER,
-        autoIncrement: true,
+        type: DataTypes.UUID,
+        defaultValue: DataTypes.UUIDV4,
         primaryKey: true,
+        allowNull: false,
       },
       avecId: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.UUID, 
         allowNull: false,
+        references: {
+          model: 'avecs',
+          key: 'id',
+        },
       },
       startDate: {
         type: DataTypes.DATE,

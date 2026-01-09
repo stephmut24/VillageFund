@@ -8,9 +8,9 @@ export enum AvecMemberRole {
 }
 
 export interface AvecMemberAttributes {
-  id: number;
-  userId: number;
-  avecId: number;
+  id: string;
+  userId: string;
+  avecId: string;
   role: AvecMemberRole;
   createdAt?: Date;
   updatedAt?: Date;
@@ -25,9 +25,9 @@ export class AvecMember
   extends Model<AvecMemberAttributes, AvecMemberCreationAttributes>
   implements AvecMemberAttributes
 {
-  public id!: number;
-  public userId!: number;
-  public avecId!: number;
+  public id!: string;
+  public userId!: string;
+  public avecId!: string;
   public role!: AvecMemberRole;
 
   public readonly createdAt!: Date;
@@ -50,17 +50,26 @@ export const AvecMemberModel = (sequelize: Sequelize) => {
   AvecMember.init(
     {
       id: {
-        type: DataTypes.INTEGER,
-        autoIncrement: true,
+        type: DataTypes.UUID,
+        defaultValue: DataTypes.UUIDV4,
         primaryKey: true,
+        allowNull: false,
       },
       userId: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.UUID, 
         allowNull: false,
+        references: {
+          model: 'users',
+          key: 'id',
+        },
       },
       avecId: {
-        type: DataTypes.INTEGER,
+       type: DataTypes.UUID, 
         allowNull: false,
+        references: {
+          model: 'avecs',
+          key: 'id',
+        },
       },
       role: {
         type: DataTypes.ENUM('PRESIDENT', 'TREASURER', 'MEMBER'),

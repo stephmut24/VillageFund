@@ -4,9 +4,9 @@ import { AvecService } from '../services';
 import { UserPayload } from '../types/auth.types';
 
 export class AvecController {
-  // ✅ createAvec static ou instance, à toi de choisir
+  
   static createAvec = asyncHandler(async (req: Request, res: Response) => {
-    const user: UserPayload | undefined = req.user; // Type explicite
+    const user: UserPayload | undefined = req.user; 
 
     if (!user) {
       throw new AppError('Unauthorized', 401);
@@ -36,7 +36,7 @@ export class AvecController {
     if (req.user.globalRole !== 'SUPER_ADMIN')
       throw new AppError('Forbidden', 403);
 
-    const avecId = Number(req.params.id);
+    const avecId = (req.params.id);
     const avec = await AvecService.validateAvec(avecId);
 
     return successResponse(res, {
@@ -51,7 +51,7 @@ export class AvecController {
       const user: UserPayload | undefined = req.user;
       if (!user) throw new AppError('Unauthorized', 401);
 
-      const avecId = Number(req.params.id);
+      const avecId = (req.params.id);
       const { userIds } = req.body; // [1,2,3]
 
       const members = await AvecService.addMembers(avecId, userIds);

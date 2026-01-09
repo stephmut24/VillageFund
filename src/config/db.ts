@@ -3,6 +3,7 @@ interface DatabaseConfig {
   username: string;
   password: string;
   port?: number;
+  dialect: string;
 }
 
 const getEnv = (key: string): string => {
@@ -17,7 +18,7 @@ const prefixConf = (): 'DEV' | 'TEST' | 'PROD' => {
   switch (process.env.NODE_ENV) {
     case 'development':
       return 'DEV';
-    case 'testing':
+    case 'test':
       return 'TEST';
     case 'production':
       return 'PROD';
@@ -34,5 +35,6 @@ export const databaseConnection = (): DatabaseConfig => {
     username: getEnv(`DB_${prefix}_USERNAME`),
     password: getEnv(`DB_${prefix}_PASSWORD`),
     port: Number(process.env[`DB_${prefix}_PORT`]) || 5432,
+    dialect: getEnv(`DB_${prefix}_DIALECT`)
   };
 };

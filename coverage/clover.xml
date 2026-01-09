@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1767967410323" clover="3.2.0">
+  <project timestamp="1767967410324" name="All files">
+    <metrics statements="70" coveredstatements="42" conditionals="14" coveredconditionals="6" methods="15" coveredmethods="3" elements="99" coveredelements="51" complexity="0" loc="70" ncloc="70" packages="2" files="9" classes="9"/>
+    <package name="database.models">
+      <metrics statements="58" coveredstatements="32" conditionals="11" coveredconditionals="6" methods="13" coveredmethods="3"/>
+      <file name="avec.ts" path="/Users/mutarushwa/Documents/Projects/Solvit/VillageFund/src/database/models/avec.ts">
+        <metrics statements="12" coveredstatements="7" conditionals="2" coveredconditionals="2" methods="3" coveredmethods="1"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="4" count="1" type="cond" truecount="2" falsecount="0"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="6" count="1" type="stmt"/>
+        <line num="7" count="1" type="stmt"/>
+        <line num="21" count="1" type="stmt"/>
+        <line num="34" count="0" type="stmt"/>
+        <line num="39" count="0" type="stmt"/>
+        <line num="44" count="0" type="stmt"/>
+        <line num="51" count="1" type="stmt"/>
+        <line num="52" count="0" type="stmt"/>
+        <line num="87" count="0" type="stmt"/>
+      </file>
+      <file name="avecMember.ts" path="/Users/mutarushwa/Documents/Projects/Solvit/VillageFund/src/database/models/avecMember.ts">
+        <metrics statements="11" coveredstatements="7" conditionals="2" coveredconditionals="2" methods="3" coveredmethods="1"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="4" count="1" type="cond" truecount="2" falsecount="0"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="6" count="1" type="stmt"/>
+        <line num="7" count="1" type="stmt"/>
+        <line num="24" count="1" type="stmt"/>
+        <line num="37" count="0" type="stmt"/>
+        <line num="42" count="0" type="stmt"/>
+        <line num="49" count="1" type="stmt"/>
+        <line num="50" count="0" type="stmt"/>
+        <line num="88" count="0" type="stmt"/>
+      </file>
+      <file name="cycle.ts" path="/Users/mutarushwa/Documents/Projects/Solvit/VillageFund/src/database/models/cycle.ts">
+        <metrics statements="6" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="0"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="24" count="1" type="stmt"/>
+        <line num="43" count="0" type="stmt"/>
+        <line num="50" count="1" type="stmt"/>
+        <line num="51" count="0" type="stmt"/>
+        <line num="111" count="0" type="stmt"/>
+      </file>
+      <file name="index.ts" path="/Users/mutarushwa/Documents/Projects/Solvit/VillageFund/src/database/models/index.ts">
+        <metrics statements="19" coveredstatements="9" conditionals="5" coveredconditionals="0" methods="2" coveredmethods="0"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="16" count="1" type="stmt"/>
+        <line num="17" count="1" type="stmt"/>
+        <line num="18" count="1" type="stmt"/>
+        <line num="19" count="1" type="stmt"/>
+        <line num="21" count="1" type="stmt"/>
+        <line num="23" count="0" type="stmt"/>
+        <line num="24" count="0" type="stmt"/>
+        <line num="25" count="0" type="stmt"/>
+        <line num="26" count="0" type="stmt"/>
+        <line num="28" count="0" type="stmt"/>
+        <line num="36" count="0" type="stmt"/>
+        <line num="37" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="42" count="0" type="stmt"/>
+        <line num="43" count="0" type="stmt"/>
+        <line num="47" count="0" type="stmt"/>
+      </file>
+      <file name="user.ts" path="/Users/mutarushwa/Documents/Projects/Solvit/VillageFund/src/database/models/user.ts">
+        <metrics statements="10" coveredstatements="6" conditionals="2" coveredconditionals="2" methods="3" coveredmethods="1"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="4" count="1" type="cond" truecount="2" falsecount="0"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="6" count="1" type="stmt"/>
+        <line num="25" count="1" type="stmt"/>
+        <line num="40" count="0" type="stmt"/>
+        <line num="45" count="0" type="stmt"/>
+        <line num="52" count="1" type="stmt"/>
+        <line num="53" count="0" type="stmt"/>
+        <line num="93" count="0" type="stmt"/>
+      </file>
+    </package>
+    <package name="validators">
+      <metrics statements="12" coveredstatements="10" conditionals="3" coveredconditionals="0" methods="2" coveredmethods="0"/>
+      <file name="auth.validator.ts" path="/Users/mutarushwa/Documents/Projects/Solvit/VillageFund/src/validators/auth.validator.ts">
+        <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="2" type="stmt"/>
+        <line num="3" count="2" type="stmt"/>
+      </file>
+      <file name="cycle.validator.ts" path="/Users/mutarushwa/Documents/Projects/Solvit/VillageFund/src/validators/cycle.validator.ts">
+        <metrics statements="4" coveredstatements="2" conditionals="3" coveredconditionals="0" methods="2" coveredmethods="0"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="44" count="0" type="stmt"/>
+        <line num="52" count="0" type="cond" truecount="0" falsecount="3"/>
+      </file>
+      <file name="index.ts" path="/Users/mutarushwa/Documents/Projects/Solvit/VillageFund/src/validators/index.ts">
+        <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="3" count="1" type="stmt"/>
+      </file>
+      <file name="user.validator.ts" path="/Users/mutarushwa/Documents/Projects/Solvit/VillageFund/src/validators/user.validator.ts">
+        <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="4" count="1" type="stmt"/>
+      </file>
+    </package>
+  </project>
+</coverage>

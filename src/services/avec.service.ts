@@ -19,7 +19,7 @@ export class AvecService {
       const avec = await Avec.create(
         {
           name: data.name,
-          ownerId: data.ownerId,
+          ownerId: data.ownerId.toString(),
           status: AvecStatus.PENDING,
         },
         { transaction },
@@ -28,7 +28,7 @@ export class AvecService {
       // 2️ Add creator as a PRESIDENT
       await AvecMember.create(
         {
-          userId: data.ownerId,
+          userId: data.ownerId.toString(),
           avecId: avec.id,
           role: AvecMemberRole.PRESIDENT,
         },
@@ -44,7 +44,7 @@ export class AvecService {
   }
 
   //  Valider une AVEC (seul SUPER_ADMIN)
-  static async validateAvec(avecId: number): Promise<Avec> {
+  static async validateAvec(avecId: string): Promise<Avec> {
     const avec = await Avec.findByPk(avecId);
     if (!avec) throw new AppError('AVEC not found', 404);
 
@@ -56,8 +56,8 @@ export class AvecService {
 
   //  Ajouter des membres à une AVEC
   static async addMembers(
-    avecId: number,
-    userIds: number[],
+    avecId: string,
+    userIds: string[],
   ): Promise<AvecMember[]> {
     const members: AvecMember[] = [];
 

@@ -1,4 +1,4 @@
 export interface CreateAvecInput {
   name: string;
-  ownerId: number;
+  ownerId: string;
 }

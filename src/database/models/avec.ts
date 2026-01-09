@@ -8,9 +8,9 @@ export enum AvecStatus {
 }
 
 export interface AvecAttributes {
-  id: number;
+  id: string;
   name: string;
-  ownerId: number;
+  ownerId: string;
   status: AvecStatus;
   createdAt?: Date;
   updatedAt?: Date;
@@ -22,9 +22,9 @@ export class Avec
   extends Model<AvecAttributes, AvecCreationAttributes>
   implements AvecAttributes
 {
-  public id!: number;
+  public id!: string;
   public name!: string;
-  public ownerId!: number;
+  public ownerId!: string;
   public status!: AvecStatus;
 
   public readonly createdAt!: Date;
@@ -52,17 +52,23 @@ export const AvecModel = (sequelize: Sequelize) => {
   Avec.init(
     {
       id: {
-        type: DataTypes.INTEGER,
-        autoIncrement: true,
+        type: DataTypes.UUID,
+        defaultValue: DataTypes.UUIDV4,
         primaryKey: true,
+        allowNull: false,
       },
       name: {
         type: DataTypes.STRING,
         allowNull: false,
       },
       ownerId: {
-        type: DataTypes.INTEGER,
+       type: DataTypes.UUID, 
         allowNull: false,
+        references: {
+          model: 'users',
+          key: 'id',
+        },
+
       },
       status: {
         type: DataTypes.ENUM('PENDING', 'ACTIVE', 'CLOSED'),
